@@ -1,49 +1,25 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
-import { select, useTodoStore } from './useTodoStore';
-
-const CreateTodo = () => {
-  const [task, setTask] = useState<string>('');
-  const addTask = useTodoStore(select.addTask);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newTask = e.target.value;
-    setTask(newTask);
-  };
-
-  const handleSubmit = (_e: MouseEvent<HTMLButtonElement>) => {
-    addTask(task);
-  };
-
-  return (
-    <div className="flex justify-center ">
-      <input
-        className="rounded border border-slate-200 p-2 bg-slate-800 mr-2 w-80"
-        value={task}
-        onChange={handleChange}
-      />
-      <button
-        className="rounded border border-slate-200 px-4 py-2 uppercase"
-        onClick={handleSubmit}
-      >
-        Add Todo
-      </button>
-    </div>
-  );
-};
+import CreateTodo from '@/components/CreateTodo';
+import { select, useTodoStore } from '@/stores/useTodoStore';
+import TodoItem from '@/components/TodoItem/TodoItem';
+import ClearTodoButton from './components/ClearTodoButton/ClearTodoButton';
+import shallow from 'zustand/shallow';
 
 const App = () => {
-  const todos = useTodoStore(select.todos);
+  const todos = useTodoStore(select.todos, shallow);
 
-  console.log(todos)
   return (
     <div className="w-screen h-screen bg-slate-800 text-slate-100 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="pt-8">
           <CreateTodo />
-          <div className="pt-8">
+          <div className="pt-8 space-y-4">
+            <h2 className="text-lg font-bold text-center">To do list</h2>
             {todos.map((todo) => (
-              <div key={todo.id}>{todo.task}</div>
+              <TodoItem key={todo.id} todo={todo} />
             ))}
+            <div className="flex justify-center">
+              <ClearTodoButton />
+            </div>
           </div>
         </div>
       </div>
