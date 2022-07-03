@@ -1,7 +1,7 @@
 import { select, Todo, useTodoStore } from '@/stores/useTodoStore';
 import { ChangeEvent, memo, useState } from 'react';
 
-interface ITodoItemProps {
+export interface ITodoItemProps {
   todo: Todo;
 }
 

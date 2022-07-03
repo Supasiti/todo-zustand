@@ -11,4 +11,8 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'esbuild-jest',
   },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  setupFilesAfterEnv: ['<rootDir>/internal/test-setup.ts'],
 };
