@@ -25,6 +25,18 @@
     "react-hooks",
     "prettier"
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["*.test.tsx?"],
+      "env": {
+        "jest": true
+      },
+    }
+  ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -36,10 +48,8 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
-
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-
     "prettier/prettier": [
       "warn",
       {
